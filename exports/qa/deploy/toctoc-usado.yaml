@@ -9,7 +9,7 @@ spec:
   selector:
     matchLabels:
       app: toctoc-usado
-  replicas: 1 # indica al controlador que ejecute 2 pods
+  replicas: 2 # indica al controlador que ejecute 2 pods
   template:
     metadata:
       labels:
