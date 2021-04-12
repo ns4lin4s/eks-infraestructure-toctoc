@@ -1,0 +1,9 @@
+FROM nginx
+
+COPY qa/nginx.conf /etc/nginx/nginx.conf
+
+COPY qa/sites/server.default.conf /etc/nginx/sites-available/server.default.conf
+COPY qa/sites/sso.default.conf /etc/nginx/sites-available/sso.default.conf
+COPY qa/sites/portal-corredoras.default.conf /etc/nginx/sites-available/portal-corredoras.default.conf
+COPY qa/sites/urban-server.default.conf /etc/nginx/sites-available/urban-server.default.conf
+COPY qa/sites/ventas.default.conf /etc/nginx/sites-available/ventas.default.conf

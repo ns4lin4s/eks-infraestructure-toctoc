@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Usa apps/v1beta2 para versiones anteriores a 1.9.0
+kind: Deployment
+metadata:
+  name: toctoc-server
+  labels:
+    app: toctoc-server
+    host: toctoc-shell
+spec:
+  selector:
+    matchLabels:
+      app: toctoc-server
+  replicas: 1 # indica al controlador que ejecute 2 pods
+  template:
+    metadata:
+      labels:
+        app: toctoc-server
+        host: toctoc-shell
+    spec:
+      containers:
+      - name: toctoc-server
+        image: 573624488707.dkr.ecr.us-east-1.amazonaws.com/toctoc-server:latest
+      nodeSelector:
+        host: toctoc-shell

@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: enviorenovaciones
+  namespace: default
+spec:
+  schedule: "0 20 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-envio-renovaciones
+            image: buildpack-deps:curl
+            imagePullPolicy: IfNotPresent
+            args:
+            - /bin/sh
+            - -ec
+            - date; curl http://portal-corredoras:3000/gestioncorredor/api/envio-renovaciones
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 0
+  
+  concurrencyPolicy: Forbid

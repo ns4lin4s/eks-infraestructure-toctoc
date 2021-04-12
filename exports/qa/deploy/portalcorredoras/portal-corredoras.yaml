@@ -1,0 +1,23 @@
+apiVersion: apps/v1 # Usa apps/v1beta2 para versiones anteriores a 1.9.0
+kind: Deployment
+metadata:
+  name: portal-corredoras
+  labels:
+    app: portal-corredoras
+    host: toctoc-shell
+spec:
+  selector:
+    matchLabels:
+      app: portal-corredoras
+  replicas: 1 # indica al controlador que ejecute 2 pods
+  template:
+    metadata:
+      labels:
+        app: portal-corredoras
+        host: toctoc-shell
+    spec:
+      containers:
+      - name: portal-corredoras
+        image: 573624488707.dkr.ecr.us-east-1.amazonaws.com/portal-corredoras:latest
+      nodeSelector:
+        host: toctoc-shell

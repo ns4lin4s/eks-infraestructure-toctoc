@@ -1,0 +1,25 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: ventas-frontend
+  labels:
+    app: ventas-frontend
+    host: toctoc-shell
+spec:
+  selector:
+    matchLabels:
+      app: ventas-frontend
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: ventas-frontend
+        host: toctoc-shell
+    spec:
+      containers:
+      - name: ventas-frontend
+        image: 573624488707.dkr.ecr.us-east-1.amazonaws.com/ventas-frontend:latest
+      # imagePullSecrets:
+      #   - name: awsecr-cred
+      nodeSelector:
+        host: toctoc-shell

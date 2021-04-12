@@ -1,0 +1,23 @@
+apiVersion: batch/v1beta1
+kind: CronJob
+metadata:
+  name: oportunidades
+  namespace: default
+spec:
+  schedule: "1 0 * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+          - name: cron-oportunidades
+            image: buildpack-deps:curl
+            imagePullPolicy: IfNotPresent
+            args:
+            - /bin/sh
+            - -ec
+            - date; curl http://procesamiento:81/oportunidades
+          restartPolicy: OnFailure
+          terminationGracePeriodSeconds: 0
+  
+  concurrencyPolicy: Forbid

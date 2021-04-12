@@ -1,0 +1,24 @@
+version: "3.9"
+services:
+  toctoc-nginx:
+    build:
+      context: ./nginx/
+      dockerfile: dockerfile.local
+    ports:
+      - "7000:80"
+      - "7001:433"
+    links:
+      - toctoc-redis
+      - toctoc-server
+  toctoc-server:
+    build:
+      context: ../toctoc-server/
+      dockerfile: dockerfile.qa
+    # ports:
+    #   - "4999:4999"
+    links:
+      - toctoc-redis
+  toctoc-redis:
+    image: redis
+volumes:
+  logvolume01: {}
